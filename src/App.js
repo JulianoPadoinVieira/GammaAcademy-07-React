@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+// Usado o hook useState
+import React, { useState } from 'react';
 
-function App() {
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // Elementos irmãos só podem ser passados dentro de outra tag, abaixo usou-se o fragment "<>"
+    <>
+      {/* OBS: "class" no javascript é uma palavra reservada, então /usa-se "className" para evitar futuros erros. */}
+      <input name="usuario" id="usuario" className="usuario" placeholder="Usuário" />
+      <button type="button">Pesquisar</button>
+    </>
   );
+
 }
 
 export default App;
