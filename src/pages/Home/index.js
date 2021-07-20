@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 export default function Home(props) {
   const history = useHistory();
   const [ usuario, setUsuario ] = useState('');
+  const [ erro, setErro] = useState(false);
 
   function handlePesquisa() {
     axios.get(`https://api.github.com/users/${usuario}/repos`)
@@ -16,19 +17,25 @@ export default function Home(props) {
           repositoriesName.push(repository.name);
       });
       localStorage.setItem('repositoriesName', JSON.stringify(repositoriesName));
+      setErro(false);
       history.push('/repositories');
-    });
+    })
+      .catch(err => {
+        setErro(true);
+      });
 
   }
 
-  return (
-    // Elementos irmãos só podem ser passados dentro de outra tag, abaixo usou-se o fragment "<>"
-
-    <S.Container>
-      {/* OBS: "class" no javascript é uma palavra reservada, então /usa-se "className" para evitar futuros erros. */}
-      <S.Input className="usuario" placeholder="Usuário" value={usuario} onChange={e => setUsuario(e.target.value)} />
-      <S.Button type="button" onClick={handlePesquisa} >Pesquisar</S.Button>
-    </S.Container>
+  return (      
+    <S.HomeContainer>
+      <S.Content>
+        {/* OBS: "class" no javascript é uma palavra reservada, então /usa-se "className" para evitar futuros erros. */}
+        <S.Input className="usuarioInput" placeholder="Usuário" value={usuario} onChange={e => setUsuario(e.target.value)} />
+        <S.Button type="button" onClick={handlePesquisa}>Pesquisar</S.Button>
+      </S.Content>
+      {/* Operador ternário */}
+      { erro ? <S.ErrorMsg>Ocorreu um erro. Tente novamente.</S.ErrorMsg> : '' }
+    </S.HomeContainer>
   );
 
 }
