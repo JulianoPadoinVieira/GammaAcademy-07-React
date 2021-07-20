@@ -1,3 +1,7 @@
+Projeto final para aprendizado com React oferecido pela Gamma Academy para pequisa de projetos no GitHub.
+
+Abaixo a documentação completa:
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
